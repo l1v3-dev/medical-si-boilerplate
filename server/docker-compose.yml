@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  # backend:
+  #   ports:
+  #     - 5000:5000
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: minimal_back
+  #   volumes:
+  #     - ./src:/app
+  #   networks: ["minimal"]
+
+  mongodb:
+    image: mongo:4.4-rc
+    ports:
+      - 27018:27017
+    container_name: minimal_mongo
+    networks: ["minimal"]
+
+networks:
+  minimal:
