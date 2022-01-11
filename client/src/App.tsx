@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useQuery } from "@apollo/client";
+import { IUser } from "./interfaces/admin";
+import queries from "./graphql/queries";
 
 function App() {
+  const { loading, error, data } = useQuery(queries.user.GET_ALL_USERS);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header">THIS IS THE FRONT END</header>
+      <ul>
+        {data.users.map((user: IUser) => (
+          <li key={user._id}>{user.username}</li>
+        ))}
+      </ul>
     </div>
   );
 }
