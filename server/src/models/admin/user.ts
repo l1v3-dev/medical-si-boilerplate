@@ -2,22 +2,29 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import config from "../config";
-import { EUserGenre, EUserRole } from "../enums/common";
+import config from "../../config";
+import { EUserGenre, EUserRole } from "../../enums/common";
 
 const userSchema = new mongoose.Schema(
   {
     firstname: String,
     lastname: String,
-    username: String,
-    password: String,
+    birthDate: Date,
     sexe: { type: String, enum: [EUserGenre.FEMALE, EUserGenre.MALE] },
     image: [String],
-    role: {
-      type: String,
-      enum: [EUserRole.ADMIN, EUserRole.CUSTOMER, EUserRole.SELLER],
-      default: EUserRole.CUSTOMER,
-    },
+
+    email: String,
+    password: String,
+    matricule: String,
+    spec: [{ type: String }],
+    role: [
+      {
+        type: String,
+        enum: [EUserRole.ADMIN, EUserRole.CUSTOMER, EUserRole.SELLER],
+        default: EUserRole.CUSTOMER,
+      },
+    ],
+    isActive: { type: Boolean, default: false },
     deleted: { type: Boolean, default: false },
   },
   { timestamps: true }

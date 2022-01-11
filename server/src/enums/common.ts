@@ -13,3 +13,8 @@ export enum EHistoryType {
   USER = "User",
   PRODUCT = "Product",
 }
+
+export enum EPrestationType {
+  EXTERNE = "externe",
+  INTERNE = "interne",
+}

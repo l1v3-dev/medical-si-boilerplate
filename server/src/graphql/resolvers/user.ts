@@ -1,4 +1,4 @@
-import User, { validateUser } from "../../models/user";
+import User, { validateUser } from "../../models/admin/user";
 import { pick } from "lodash";
 import { checkValidID } from "../../utils/objectID";
 import { MyError } from "../../utils/errors";
