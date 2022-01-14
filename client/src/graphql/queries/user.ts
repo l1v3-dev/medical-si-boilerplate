@@ -7,7 +7,6 @@ export const GET_ALL_USERS = gql`
       username
       lastname
       firstname
-      age
       sexe
     }
   }
