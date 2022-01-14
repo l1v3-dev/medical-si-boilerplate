@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const userTypeDefs = gql`
   extend type Query {
-    users: [User]!
+    users(pageSize: Int, after: Int): [User]!
     user(userID: ID!): User
   }
 

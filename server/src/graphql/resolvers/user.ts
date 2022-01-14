@@ -5,8 +5,11 @@ import { MyError } from "../../utils/errors";
 import { EServerErrors } from "../../enums/errors";
 
 const UserQueries = {
-  users: async () => {
-    const users = await User.find({ deleted: false }).lean();
+  users: async (p, { pageSize = 10, after }) => {
+    const users = await User.find({ deleted: false })
+      .skip(after)
+      .limit(pageSize)
+      .lean();
     if (!users) throw new MyError(`Users ${EServerErrors.NOT_FOUND}`);
     return users;
   },
