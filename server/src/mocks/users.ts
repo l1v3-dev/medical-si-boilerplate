@@ -10,10 +10,9 @@ export const createUsers = async (nb: number) => {
       lastname: `rakoto_${i}`,
       firstname: `arivelo_${i}`,
       sexe: i % 2 === 0 ? EUserGenre.MALE : EUserGenre.FEMALE,
-      tel: "0323214568",
-      email: "arivelo@gmail.com",
-      password: "arivelolive3306",
-      role: EUserRole.CUSTOMER,
+      username: `username_${i}`,
+      password: `username_${i}`,
+      role: [EUserRole.ADMIN],
     });
   }
   return await seed(list);
@@ -25,25 +24,24 @@ const seed = async (usersList: any) => {
   const result = [];
   await User.deleteMany();
   do {
-    const person = await User.findOne({ email: usersList[i].email });
-    if (!person) {
-      const newUser = new User(
-        pick(usersList[i], [
-          "firstname",
-          "lastname",
-          "sexe",
-          "age",
-          "email",
-          "tel",
-          "password",
-          "image",
-          "role",
-        ])
-      );
+    // const person = await User.findOne({ email: usersList[i].email });
+    // if (!person) {
+    const newUser = new User(
+      pick(usersList[i], [
+        "firstname",
+        "lastname",
+        "sexe",
+        "email",
+        "username",
+        "password",
+        "image",
+        "role",
+      ])
+    );
 
-      await User.create(newUser);
-      result.push(newUser);
-    }
+    await User.create(newUser);
+    result.push(newUser);
+    // }
 
     i++;
   } while (i < usersList.length);

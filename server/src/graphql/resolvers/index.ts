@@ -1,3 +1,4 @@
+import { AuthMutations } from "./auth";
 import { UserQueries, UserMutations } from "./user";
 
 const rootResolver = {
@@ -5,6 +6,7 @@ const rootResolver = {
     ...UserQueries,
   },
   Mutation: {
+    ...AuthMutations,
     ...UserMutations,
   },
 };

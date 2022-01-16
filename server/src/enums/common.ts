@@ -1,7 +1,7 @@
 export enum EUserRole {
   ADMIN = "admin",
-  CUSTOMER = "customer",
-  SELLER = "seller",
+  MEDECIN = "medecin",
+  ACCUEIL = "accueil",
 }
 
 export enum EUserGenre {

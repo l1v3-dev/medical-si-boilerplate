@@ -17,7 +17,7 @@ export const userTypeDefs = gql`
     lastname: String
     username: String
     image: [String]
-    role: String!
+    role: [String!]!
     deleted: Boolean!
   }
 
@@ -27,7 +27,7 @@ export const userTypeDefs = gql`
     username: String
     password: String
     image: [String]
-    role: String
+    role: [String]
     deleted: Boolean
   }
 `;

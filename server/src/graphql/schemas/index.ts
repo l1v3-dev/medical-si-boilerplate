@@ -1,5 +1,7 @@
 import { ApolloServerExpressConfig, gql } from "apollo-server-express";
 import resolvers from "../resolvers";
+
+import { authTypeDefs } from "./auth";
 import { userTypeDefs } from "./user";
 
 const typeDefs = gql`
@@ -12,6 +14,7 @@ const typeDefs = gql`
   type Subscription {
     _empty: String
   }
+  ${authTypeDefs}
   ${userTypeDefs}
 `;
 
