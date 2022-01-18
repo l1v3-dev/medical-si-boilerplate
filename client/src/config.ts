@@ -1,8 +1,8 @@
-const httpProtocol = process.env.REACT_APP_USE_SSL ? "http" : "http";
+const httpProtocol = "http";
 
 const APP_CONFIG = {
   apiUrl:
-    `${httpProtocol}://${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/graphql` ||
+    `${httpProtocol}://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/graphql` ||
     "",
 };
 

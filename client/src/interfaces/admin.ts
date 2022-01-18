@@ -3,9 +3,6 @@ export interface IUser {
   firstname: string;
   lastname: string;
   username: string;
-  age: number;
-  sexe: string;
-  role: string;
   password?: string;
   createdAt?: string;
   updatedAt?: string;

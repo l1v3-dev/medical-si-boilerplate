@@ -1,9 +1,8 @@
 export interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
+  _id: string;
+  username: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface HeadCell {

@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import { useQuery } from "@apollo/client";
 import {
   Box,
   Paper,
@@ -11,21 +12,31 @@ import CustomTableHeader from "../../../components/Table/TableHead";
 import CustomTableBody from "../../../components/Table/TableBody";
 import { HeadCell, Data } from "../../../interfaces/table";
 import { Order } from "../../../components/utils";
+import Spinner from "../../../components/Common/Spinner";
+import queries from "../../../graphql/queries";
+import { HEAD_CELLS, TABLE_COLUMNS } from "../../../constants/users";
 
 interface IUsersProps {
   dense: boolean;
-  headers: HeadCell[];
-  rows: Data[];
 }
 
 const Users: FC<IUsersProps> = (props) => {
   // const classes = useStyles();
-  const { dense, headers, rows } = props;
+  const { dense } = props;
   const [order, setOrder] = useState<Order>("asc");
-  const [orderBy, setOrderBy] = useState<keyof Data>("calories");
+  const [orderBy, setOrderBy] = useState<keyof Data>("firstname");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selected, setSelected] = useState<readonly string[]>([]);
+  const [headers] = useState(HEAD_CELLS);
+  const [cols] = useState(TABLE_COLUMNS);
+
+  const { loading, error, data: rows } = useQuery(queries.user.GET_ALL_USERS);
+  if (loading) return <Spinner />;
+  if (error) {
+    console.log("!!err", error);
+    return <p>Error :(</p>;
+  }
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -37,12 +48,12 @@ const Users: FC<IUsersProps> = (props) => {
   };
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
+    // if (event.target.checked) {
+    //   const newSelecteds = rows.map((n) => n.name);
+    //   setSelected(newSelecteds);
+    //   return;
+    // }
+    // setSelected([]);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -73,28 +84,33 @@ const Users: FC<IUsersProps> = (props) => {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={rows.users.length}
             />
-            <CustomTableBody
-              rows={rows}
-              dense={true}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              order={order}
-              orderBy={orderBy}
-              setSelected={setSelected}
-            />
+            {rows.users && (
+              <CustomTableBody
+                columns={cols}
+                rows={rows.users}
+                dense={true}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                order={order}
+                orderBy={orderBy}
+                setSelected={setSelected}
+              />
+            )}
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        {rows.users && (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.users.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
     </Box>
   );

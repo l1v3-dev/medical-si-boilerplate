@@ -5,6 +5,7 @@ import { getComparator, Order } from "../../utils";
 
 interface ICustomTableBodyProps {
   rows: Data[];
+  columns: String[];
   dense: boolean;
   page: number;
   rowsPerPage: number;
@@ -14,7 +15,16 @@ interface ICustomTableBodyProps {
 }
 
 const CustomTableBody: FC<ICustomTableBodyProps> = (props) => {
-  const { rows, dense, page, rowsPerPage, order, orderBy, setSelected } = props;
+  const {
+    rows,
+    dense,
+    columns,
+    page,
+    rowsPerPage,
+    order,
+    orderBy,
+    setSelected,
+  } = props;
 
   const [selected] = useState<readonly string[]>([]);
 
@@ -51,13 +61,13 @@ const CustomTableBody: FC<ICustomTableBodyProps> = (props) => {
         .sort(getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((row, index) => {
-          const isItemSelected = isSelected(row.name);
+          const isItemSelected = isSelected(row._id);
           const labelId = `custom-table-checkbox-${index}`;
 
           return (
             <TableRow
               hover
-              onClick={(event) => handleClick(event, row.name)}
+              onClick={(event) => handleClick(event, row._id)}
               role="checkbox"
               aria-checked={isItemSelected}
               tabIndex={-1}
@@ -73,7 +83,7 @@ const CustomTableBody: FC<ICustomTableBodyProps> = (props) => {
                   }}
                 />
               </TableCell>
-              {Object.keys(row).map((key, index) => (
+              {columns.map((key, index) => (
                 <TableCell align="right" key={index}>
                   {/* @ts-ignore */}
                   {row[key]}
