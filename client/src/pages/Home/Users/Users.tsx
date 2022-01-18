@@ -14,7 +14,7 @@ import { HeadCell, Data } from "../../../interfaces/table";
 import { Order } from "../../../components/utils";
 import Spinner from "../../../components/Common/Spinner";
 import queries from "../../../graphql/queries";
-import { HEAD_CELLS, TABLE_COLUMNS } from "../../../constants/users";
+import { USER_HEAD_CELLS, USER_TABLE_COLUMNS } from "../../../constants/users";
 
 interface IUsersProps {
   dense: boolean;
@@ -28,8 +28,8 @@ const Users: FC<IUsersProps> = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selected, setSelected] = useState<readonly string[]>([]);
-  const [headers] = useState(HEAD_CELLS);
-  const [cols] = useState(TABLE_COLUMNS);
+  const [headers] = useState(USER_HEAD_CELLS);
+  const [cols] = useState(USER_TABLE_COLUMNS);
 
   const { loading, error, data: rows } = useQuery(queries.user.GET_ALL_USERS);
   if (loading) return <Spinner />;

@@ -8,6 +8,6 @@ export interface Data {
 export interface HeadCell {
   disablePadding: boolean;
   id: keyof Data;
-  label: string;
+  // label: string;
   numeric: boolean;
 }

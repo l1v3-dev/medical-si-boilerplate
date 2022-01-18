@@ -1,23 +1,21 @@
 import { HeadCell } from "./../interfaces/table";
-export const TABLE_COLUMNS = ["firstname", "lastname", "username"];
 
-export const HEAD_CELLS: HeadCell[] = [
+export const USER_HEAD_CELLS: HeadCell[] = [
   {
     id: "firstname",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
   },
   {
     id: "lastname",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
-    label: "Calories",
   },
   {
     id: "username",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
-    label: "Fat (g)",
   },
 ];
+
+export const USER_TABLE_COLUMNS = USER_HEAD_CELLS.map(c => c.id)

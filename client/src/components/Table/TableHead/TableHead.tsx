@@ -10,6 +10,7 @@ import {
 import { visuallyHidden } from "@mui/utils";
 import { Order } from "../../utils";
 import { Data, HeadCell } from "../../../interfaces/table";
+import { useIntl } from 'react-intl';
 
 interface ITableHeaderProps {
   headerCells: HeadCell[];
@@ -25,7 +26,7 @@ interface ITableHeaderProps {
 }
 
 const TableHeader: FC<ITableHeaderProps> = (props) => {
-  // const classes = useStyles();
+  const intl = useIntl();
   const {
     headerCells,
     onSelectAllClick,
@@ -67,7 +68,7 @@ const TableHeader: FC<ITableHeaderProps> = (props) => {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              {intl.formatMessage({ id: headCell.id })}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
