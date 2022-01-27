@@ -19,6 +19,8 @@ export const userTypeDefs = gql`
     image: [String]
     role: [String!]!
     deleted: Boolean!
+    createdAt: String
+    updatedAt: String
   }
 
   input UserInput {

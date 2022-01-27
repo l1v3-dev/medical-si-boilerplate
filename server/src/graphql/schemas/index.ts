@@ -3,6 +3,7 @@ import resolvers from "../resolvers";
 
 import { authTypeDefs } from "./auth";
 import { userTypeDefs } from "./user";
+import { centreTypeDefs } from "./centre";
 
 const typeDefs = gql`
   type Query {
@@ -15,6 +16,7 @@ const typeDefs = gql`
     _empty: String
   }
   ${authTypeDefs}
+  ${centreTypeDefs}
   ${userTypeDefs}
 `;
 

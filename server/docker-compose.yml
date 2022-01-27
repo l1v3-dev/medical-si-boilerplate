@@ -12,11 +12,11 @@ services:
   #   networks: ["minimal"]
 
   mongodb:
-    image: mongo:4.4-rc
+    image: mongo:5.0
     ports:
       - 27018:27017
-    container_name: minimal_mongo
-    networks: ["minimal"]
+    container_name: medical_si_mongo
+    networks: ["medical_si"]
 
 networks:
-  minimal:
+  medical_si:
