@@ -1,6 +1,7 @@
+import { EPrestationType } from 'enums/common';
 import mongoose from "mongoose";
 import Joi from "joi";
-import { EPrestationType } from "src/enums/common";
+
 
 export default mongoose.model(
   "Prestation",

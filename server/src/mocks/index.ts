@@ -1,13 +1,11 @@
 import express from "express";
-// import { createCategories } from "./categories";
 import { createUsers } from "./users";
-// import { createMessageThread } from "./messages";
+import { createCentre } from "./centre";
 const router = express.Router();
 
 router.get("/seed", async (req, res) => {
-  // await createCategories();
-  await createUsers(5);
-  // await createMessageThread(5);
+  await createCentre(3);
+  await createUsers(25);
   console.log("seed completed successfully...");
   res.status(200).send("ok");
 });

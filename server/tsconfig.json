@@ -16,7 +16,13 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": "src",
+    "paths": {
+      "enums/*": ["enums/*"],
+      "interfaces/*": ["interfaces/*"],
+      "models/*": ["models/*"],
+      "utils/*": ["utils/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -38,5 +44,5 @@
       "esnext.asynciterable"
     ]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts"]
 }

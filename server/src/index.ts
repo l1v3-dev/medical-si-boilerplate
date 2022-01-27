@@ -1,3 +1,4 @@
+require('module-alias/register')
 import Express from "./config/express";
 import connectDB from "./config/db";
 import config from "./config";

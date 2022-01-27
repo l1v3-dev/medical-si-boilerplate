@@ -40,7 +40,7 @@ class Express {
     await this.server.start();
     this.server.applyMiddleware({ app: this.express });
     this.httpServer = http.createServer(this.express);
-  };
+  }
 }
 
 export default Express;

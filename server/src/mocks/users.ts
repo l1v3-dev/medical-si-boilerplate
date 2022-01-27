@@ -1,5 +1,6 @@
 // import faker from "faker/locale/fr";
 import { pick } from "lodash";
+import faker from "@faker-js/faker";
 import User from "../models/admin/user";
 import { EUserGenre, EUserRole } from "../enums/common";
 
@@ -7,11 +8,11 @@ export const createUsers = async (nb: number) => {
   const list = [];
   for (let i = 0; i < nb; i++) {
     list.push({
-      lastname: `rakoto_${i}`,
-      firstname: `arivelo_${i}`,
+      lastname: faker.name.lastName(),
+      firstname: faker.name.firstName(),
       sexe: i % 2 === 0 ? EUserGenre.MALE : EUserGenre.FEMALE,
-      username: `username_${i}`,
-      password: `username_${i}`,
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
       role: [EUserRole.ADMIN],
     });
   }
