@@ -13,7 +13,7 @@ import CustomTableBody from "../../../components/Table/TableBody";
 import { HeadCell, Data } from "../../../interfaces/table";
 import { Order } from "../../../components/utils";
 import Spinner from "../../../components/Common/Spinner";
-import queries from "../../../graphql/queries";
+import { GET_ALL_USERS } from "../../../graphql/User/queries";
 import { USER_HEAD_CELLS, USER_TABLE_COLUMNS } from "../../../constants/users";
 
 interface IUsersProps {
@@ -26,12 +26,22 @@ const Users: FC<IUsersProps> = (props) => {
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof Data>("firstname");
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [pageSize, setPageSize] = useState(5);
   const [selected, setSelected] = useState<readonly string[]>([]);
   const [headers] = useState(USER_HEAD_CELLS);
   const [cols] = useState(USER_TABLE_COLUMNS);
 
-  const { loading, error, data: rows } = useQuery(queries.user.GET_ALL_USERS);
+  const { loading, error, data: rows } = useQuery(GET_ALL_USERS, {
+    variables: { pageSize, after: pageSize * page },
+    onCompleted: (res) => {
+      // ...
+      console.log('!!result', res)
+    },
+    onError: (err) => {
+      // ...
+      console.log('!!err', err)
+    }
+  });
   if (loading) return <Spinner />;
   if (error) {
     console.log("!!err", error);
@@ -57,13 +67,14 @@ const Users: FC<IUsersProps> = (props) => {
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
+    console.log('!!newPage', newPage)
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
+  const handleChangePageSize = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setPageSize(parseInt(event.target.value, 10));
     setPage(0);
   };
 
@@ -92,7 +103,7 @@ const Users: FC<IUsersProps> = (props) => {
                 rows={rows.users}
                 dense={true}
                 page={page}
-                rowsPerPage={rowsPerPage}
+                rowsPerPage={pageSize}
                 order={order}
                 orderBy={orderBy}
                 setSelected={setSelected}
@@ -105,10 +116,10 @@ const Users: FC<IUsersProps> = (props) => {
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             count={rows.users.length}
-            rowsPerPage={rowsPerPage}
+            rowsPerPage={pageSize}
             page={page}
             onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
+            onRowsPerPageChange={handleChangePageSize}
           />
         )}
       </Paper>
