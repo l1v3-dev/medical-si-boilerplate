@@ -54,44 +54,46 @@ const CustomTableBody: FC<ICustomTableBodyProps> = (props) => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const formatDataForDisplay = (data: Data[]): Data[] =>
+    data
+      .slice()
+      .sort(getComparator(order, orderBy))
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
   return (
     <TableBody>
-      {rows
-        .slice()
-        .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        .map((row, index) => {
-          const isItemSelected = isSelected(row._id);
-          const labelId = `custom-table-checkbox-${index}`;
+      {formatDataForDisplay(rows).map((row, index) => {
+        const isItemSelected = isSelected(row._id);
+        const labelId = `custom-table-checkbox-${index}`;
 
-          return (
-            <TableRow
-              hover
-              onClick={(event) => handleClick(event, row._id)}
-              role="checkbox"
-              aria-checked={isItemSelected}
-              tabIndex={-1}
-              key={index}
-              selected={isItemSelected}
-            >
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={isItemSelected}
-                  inputProps={{
-                    "aria-labelledby": labelId,
-                  }}
-                />
+        return (
+          <TableRow
+            hover
+            onClick={(event) => handleClick(event, row._id)}
+            role="checkbox"
+            aria-checked={isItemSelected}
+            tabIndex={-1}
+            key={index}
+            selected={isItemSelected}
+          >
+            <TableCell padding="checkbox">
+              <Checkbox
+                color="primary"
+                checked={isItemSelected}
+                inputProps={{
+                  "aria-labelledby": labelId,
+                }}
+              />
+            </TableCell>
+            {columns.map((key, index) => (
+              <TableCell align="right" key={index}>
+                {/* @ts-ignore */}
+                {row[key]}
               </TableCell>
-              {columns.map((key, index) => (
-                <TableCell align="right" key={index}>
-                  {/* @ts-ignore */}
-                  {row[key]}
-                </TableCell>
-              ))}
-            </TableRow>
-          );
-        })}
+            ))}
+          </TableRow>
+        );
+      })}
       {emptyRows > 0 && (
         <TableRow
           style={{

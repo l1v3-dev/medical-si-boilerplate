@@ -9,11 +9,11 @@ export const CREATE_USER = gql`
     $sexe: String
   ) {
     createUser(
-      {firstname: $firstname
+      firstname: $firstname
       lastname: $lastname
       username: $username
       password: $password
-      sexe: $sexe}
+      sexe: $sexe
     ) {
       _id
       username

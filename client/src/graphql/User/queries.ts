@@ -7,9 +7,20 @@ export const GET_ALL_USERS = gql`
       username
       lastname
       firstname
+      ...MoreUserInfos
     }
   }
+
+  fragment MoreUserInfos on User {
+    username
+    role
+    deleted
+    createdAt
+    updatedAt
+  }
 `;
+
+
 
 export const GET_ONE_USER = gql`
   query GET_USER($userID: String!) {

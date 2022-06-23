@@ -34,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "get:schema": "apollo client:download-schema --endpoint http://localhost:5000/graphql output.gql",
+    "download": "apollo client:codegen --target typescript --endpoint http://localhost:5000/graphql --outputFlat src/generated"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.2"
+    "@types/react-router-dom": "^5.3.2",
+    "apollo": "^2.33.9"
   }
 }
