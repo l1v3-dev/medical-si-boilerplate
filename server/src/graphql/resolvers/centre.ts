@@ -1,8 +1,8 @@
-import Centre, { validateCentre } from "../../models/admin/centre";
+import Centre, { validateCentre } from "models/admin/centre";
 import { pick } from "lodash";
-import { checkValidID } from "../../utils/objectID";
-import { MyError } from "../../utils/errors";
-import { EServerErrors } from "../../enums/errors";
+import { checkValidID } from "utils/objectID";
+import { MyError } from "utils/errors";
+import { EServerErrors } from "enums/errors";
 
 const CentreQueries = {
   centres: async (p, { pageSize = 10, after }) => {

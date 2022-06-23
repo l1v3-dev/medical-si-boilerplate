@@ -1,12 +1,11 @@
 import Joi from "joi";
 import { compare } from "bcrypt";
-import config from "../../config";
-import User from "../../models/admin/user";
-import { MyError } from "../../utils/errors";
-import { EAuthenticationError } from "../../enums/errors";
-// import { createCategories } from "../../mocks/categories";
-import { createUsers } from "../../mocks/users";
-// import { createMessageThread } from "../../mocks/messages";
+import config from "config";
+import User from "models/admin/user";
+import { MyError } from "utils/errors";
+import { EAuthenticationError } from "enums/errors";
+import { createUsers } from "mocks/users";
+import { createCentre } from "mocks/centre";
 
 const AuthMutations = {
   login: async (p, { loginParams }: any, { res }) => {
@@ -44,24 +43,12 @@ const AuthMutations = {
 
     return { accessToken, refreshToken };
   },
-
   seed: async (p, { nbUsers }: any) => {
-    // await createCategories();
     const newUsers = await createUsers(nbUsers);
-    // await createMessageThread();
+    await createCentre(3);
     console.log("Seed completed successfully...");
     return newUsers;
   },
-  // register: async (p, { registerParams }: any) => {
-  //   const { error } = validateRegisterParams(registerParams);
-  //   if (error) throw new MyError(error.details[0].message);
-
-  //   const newUser
-  // },
-
-  // recoverPassword: async(p, {}) => {
-  //   ...
-  // }
 };
 
 function validateLoginParams(user) {

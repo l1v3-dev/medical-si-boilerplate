@@ -21,7 +21,8 @@
       "enums/*": ["enums/*"],
       "interfaces/*": ["interfaces/*"],
       "models/*": ["models/*"],
-      "utils/*": ["utils/*"]
+      "utils/*": ["utils/*"],
+      "config/*": ["config/*"]
     },
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,

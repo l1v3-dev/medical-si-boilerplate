@@ -1,6 +1,7 @@
 import { pick } from "lodash";
 import faker from "@faker-js/faker";
-import Centre from "../models/admin/centre";
+import Centre from "models/admin/centre";
+import { createServices } from "./service";
 
 const seed = async (centresList: any) => {
   let i = 0;
@@ -15,8 +16,9 @@ const seed = async (centresList: any) => {
     );
 
     await Centre.create(newCentre);
-    result.push(newCentre);
+    await createServices(5, newCentre._id);
 
+    result.push(newCentre);
     i++;
   } while (i < centresList.length);
 

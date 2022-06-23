@@ -1,8 +1,8 @@
-import Service, { validateService } from "../../models/admin/service";
+import Service, { validateService } from "models/admin/service";
 import { pick } from "lodash";
-import { checkValidID } from "../../utils/objectID";
-import { MyError } from "../../utils/errors";
-import { EServerErrors } from "../../enums/errors";
+import { checkValidID } from "utils/objectID";
+import { MyError } from "utils/errors";
+import { EServerErrors } from "enums/errors";
 
 const ServiceQueries = {
   services: async (p, { pageSize = 10, after }) => {

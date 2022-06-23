@@ -17,7 +17,7 @@ export const userTypeDefs = gql`
     lastname: String
     username: String
     image: [String]
-    role: [String!]!
+    role: [String]!
     deleted: Boolean!
     createdAt: String
     updatedAt: String

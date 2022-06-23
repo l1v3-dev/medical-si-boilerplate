@@ -1,6 +1,4 @@
-import { ApolloServerExpressConfig, gql } from "apollo-server-express";
-import resolvers from "../resolvers";
-
+import { gql } from "apollo-server-express";
 import { authTypeDefs } from "./auth";
 import { userTypeDefs } from "./user";
 import { centreTypeDefs } from "./centre";
@@ -24,10 +22,4 @@ const typeDefs = gql`
   ${userTypeDefs}
 `;
 
-const schema: ApolloServerExpressConfig = {
-  typeDefs,
-  resolvers,
-  introspection: true,
-};
-
-export default schema;
+export default typeDefs;

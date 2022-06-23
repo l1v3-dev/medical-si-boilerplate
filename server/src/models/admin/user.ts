@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import config from "../../config";
-import { EUserGenre, EUserRole } from "../../enums/common";
+import config from "config";
+import { EUserGenre, EUserRole } from "enums/common";
 
 const userSchema = new mongoose.Schema(
   {

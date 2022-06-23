@@ -1,8 +1,8 @@
-import User, { validateUser } from "../../models/admin/user";
+import User, { validateUser } from "models/admin/user";
 import { pick } from "lodash";
-import { checkValidID } from "../../utils/objectID";
-import { MyError } from "../../utils/errors";
-import { EServerErrors } from "../../enums/errors";
+import { checkValidID } from "utils/objectID";
+import { MyError } from "utils/errors";
+import { EServerErrors } from "enums/errors";
 
 const UserQueries = {
   users: async (p, { pageSize = 10, after }) => {

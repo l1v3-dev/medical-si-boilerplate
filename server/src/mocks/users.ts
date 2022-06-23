@@ -1,8 +1,8 @@
 // import faker from "faker/locale/fr";
 import { pick } from "lodash";
 import faker from "@faker-js/faker";
-import User from "../models/admin/user";
-import { EUserGenre, EUserRole } from "../enums/common";
+import User from "models/admin/user";
+import { EUserGenre, EUserRole } from "enums/common";
 
 export const createUsers = async (nb: number) => {
   const list = [];

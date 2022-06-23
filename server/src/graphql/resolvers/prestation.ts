@@ -1,8 +1,8 @@
-import Prestation, { validatePrestation } from "../../models/admin/prestation";
+import Prestation, { validatePrestation } from "models/admin/prestation";
 import { pick } from "lodash";
-import { checkValidID } from "../../utils/objectID";
-import { MyError } from "../../utils/errors";
-import { EServerErrors } from "../../enums/errors";
+import { checkValidID } from "utils/objectID";
+import { MyError } from "utils/errors";
+import { EServerErrors } from "enums/errors";
 
 const PrestationQueries = {
   prestations: async (p, { pageSize = 10, after }) => {
