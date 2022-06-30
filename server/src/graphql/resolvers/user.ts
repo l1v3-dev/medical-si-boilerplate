@@ -3,6 +3,9 @@ import { pick } from "lodash";
 import { checkValidID } from "utils/objectID";
 import { MyError } from "utils/errors";
 import { EServerErrors } from "enums/errors";
+import { PubSub } from 'graphql-subscriptions';
+
+const pubsub = new PubSub();
 
 const UserQueries = {
   users: async (p, { pageSize = 10, after }) => {
@@ -38,6 +41,11 @@ const UserMutations = {
         "role",
       ])
     );
+    pubsub.publish('USER_CREATED', {
+      userCreated: { ...user }
+    });
+    console.log('published')
+
     return await User.create(user);
   },
   updateUser: async (parent, { userID, updatedUser }: any) => {
@@ -65,4 +73,10 @@ const UserMutations = {
   },
 };
 
-export { UserQueries, UserMutations };
+const UserSubscriptions = {
+  userCreated: {
+    subscribe: () => pubsub.asyncIterator(['USER_CREATED']),
+  }
+}
+
+export { UserQueries, UserMutations, UserSubscriptions };

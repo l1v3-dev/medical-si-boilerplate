@@ -1,5 +1,5 @@
 import { AuthMutations } from "./auth";
-import { UserQueries, UserMutations } from "./user";
+import { UserQueries, UserMutations, UserSubscriptions } from "./user";
 import { CentreQueries, CentreMutations } from "./centre";
 import { ServiceQueries, ServiceMutations } from "./service";
 import { PrestationQueries, PrestationMutations } from "./prestation";
@@ -18,6 +18,9 @@ const rootResolver = {
     ...ServiceMutations,
     ...UserMutations,
   },
+  Subscription: {
+    ...UserSubscriptions
+  }
 };
 
 export default rootResolver;

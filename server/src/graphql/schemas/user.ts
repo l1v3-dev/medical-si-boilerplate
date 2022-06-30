@@ -11,6 +11,10 @@ export const userTypeDefs = gql`
     updateUser(userID: ID!, updatedUser: UserInput): User
   }
 
+  extend type Subscription {
+    userCreated: User
+  }
+
   type User {
     _id: ID!
     firstname: String
