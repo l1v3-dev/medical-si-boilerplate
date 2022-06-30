@@ -14,8 +14,8 @@ function App() {
       <ul>
         {data.users.map((user: IUser) => (
           <Fragment>
-            <li key={user._id}>{user.firstname} ({user.username})</li>
-            <span>{user.createdAt}</span>
+            <li key={user._id}>{user.firstname} {user.lastname}</li>
+            {/* <span>{user.createdAt}</span> */}
           </Fragment>
         ))}
       </ul>
